@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="container py-4">
+    <div class="dashboard-title">
+        <div>
+            <p class="eyebrow">Food inventory</p>
+            <h1>All Donations</h1>
+        </div>
+    </div>
+    <div class="row g-3">
+        {% for donation in donations %}
+            <div class="col-md-6 col-xl-4">
+                <div class="card donation-card h-100">
+                    {% if donation.image_filename %}
+                        <img src="{{ url_for('uploaded_file', filename=donation.image_filename) }}" class="card-img-top donation-img" alt="{{ donation.food_name }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between gap-2">
+                            <h5>{{ donation.food_name }}</h5>
+                            <span class="status-pill">{{ donation.status }}</span>
+                        </div>
+                        <p class="mb-1">{{ donation.quantity }} · {{ donation.category }}</p>
+                        <p class="small text-muted mb-2">{{ donation.pickup_location }}</p>
+                        <p class="small mb-0">Freshness: {{ donation.freshness_prediction }} ({{ donation.prediction_confidence }}%)</p>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12"><div class="empty-state">No donations available.</div></div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

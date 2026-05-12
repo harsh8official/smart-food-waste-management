@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero-band">
+    <div class="container py-5">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+                <p class="eyebrow">Food rescue platform</p>
+                <h1 class="display-5 fw-bold">Smart Food Waste Management System</h1>
+                <p class="lead">Donate surplus meals, predict freshness, match nearby NGOs, and track collections from one responsive dashboard.</p>
+                <div class="d-flex flex-wrap gap-2">
+                    <a class="btn btn-success btn-lg" href="{{ url_for('register') }}">Get Started</a>
+                    <a class="btn btn-outline-success btn-lg" href="{{ url_for('login') }}">Login</a>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="impact-panel">
+                    <div>
+                        <span class="metric">Freshness AI</span>
+                        <p>Decision tree model estimates whether food is safe to donate.</p>
+                    </div>
+                    <div>
+                        <span class="metric">NGO Matching</span>
+                        <p>Location text matching helps route food to nearby organizations.</p>
+                    </div>
+                    <div>
+                        <span class="metric">Email Alerts</span>
+                        <p>Notifications keep donors and NGOs updated.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container py-5">
+    <div class="section-heading">
+        <h2>Recent Donations</h2>
+        <p>Live activity from donors in the system.</p>
+    </div>
+    <div class="row g-3">
+        {% for donation in recent_donations %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card donation-card h-100">
+                    <div class="card-body">
+                        <span class="badge text-bg-success">{{ donation.category }}</span>
+                        <h5 class="mt-3">{{ donation.food_name }}</h5>
+                        <p class="mb-1">{{ donation.quantity }}</p>
+                        <p class="text-muted small mb-2">{{ donation.pickup_location }}</p>
+                        <span class="status-pill">{{ donation.status }}</span>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12"><div class="empty-state">No donations yet. Be the first donor.</div></div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

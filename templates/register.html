@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="auth-wrap wide">
+    <div class="auth-card">
+        <h1>Register</h1>
+        <form method="post" id="registerForm">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Full Name</label>
+                    <input class="form-control" name="name" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    <input class="form-control" type="email" name="email" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Password</label>
+                    <input class="form-control" type="password" name="password" minlength="6" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Confirm Password</label>
+                    <input class="form-control" type="password" name="confirm_password" minlength="6" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Role</label>
+                    <select class="form-select" name="role" id="roleSelect" required>
+                        <option value="donor">Donor</option>
+                        <option value="ngo">NGO</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Phone</label>
+                    <input class="form-control" name="phone">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Location</label>
+                    <input class="form-control" name="location" placeholder="City or area" required>
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Address</label>
+                    <input class="form-control" name="address">
+                </div>
+                <div class="col-md-8 ngo-only d-none">
+                    <label class="form-label">Organization Name</label>
+                    <input class="form-control" name="organization_name">
+                </div>
+                <div class="col-md-4 ngo-only d-none">
+                    <label class="form-label">Daily Capacity</label>
+                    <input class="form-control" type="number" name="capacity" min="1" value="50">
+                </div>
+            </div>
+            <button class="btn btn-success w-100 mt-4" type="submit">Create Account</button>
+        </form>
+        <p class="text-center mt-3 mb-0">Already registered? <a href="{{ url_for('login') }}">Login</a></p>
+    </div>
+</section>
+{% endblock %}

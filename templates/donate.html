@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="container py-4">
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <div class="panel">
+                <h1 class="h3 mb-3">Donate Food</h1>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Food Name</label>
+                            <input class="form-control" name="food_name" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Category</label>
+                            <select class="form-select" name="category" required>
+                                <option>Cooked Food</option>
+                                <option>Bakery</option>
+                                <option>Fruits</option>
+                                <option>Vegetables</option>
+                                <option>Packaged Food</option>
+                                <option>Dairy</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Quantity</label>
+                            <input class="form-control" name="quantity" placeholder="Example: 25 meals" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Expiry Time</label>
+                            <input class="form-control" type="datetime-local" name="expiry_time" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Storage Hours</label>
+                            <input class="form-control" type="number" name="storage_hours" min="0" value="2" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Temperature</label>
+                            <input class="form-control" type="number" name="temperature" value="26">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Humidity</label>
+                            <input class="form-control" type="number" name="humidity" value="75">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Pickup Location</label>
+                            <input class="form-control" name="pickup_location" placeholder="Area, city" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Food Image</label>
+                            <input class="form-control" type="file" name="food_image" accept="image/*">
+                        </div>
+                    </div>
+                    <button class="btn btn-success mt-4" type="submit">Submit Donation</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="panel h-100">
+                <h2 class="h4">Freshness Result</h2>
+                {% if prediction %}
+                    <div class="prediction-box {{ prediction }}">
+                        <strong>{{ prediction|capitalize }}</strong>
+                        <span>{{ confidence }}% confidence</span>
+                    </div>
+                    <h3 class="h5 mt-4">Nearby NGO Matches</h3>
+                    <ul class="list-group list-group-flush">
+                        {% for ngo in matches %}
+                            <li class="list-group-item px-0">
+                                <strong>{{ ngo.organization_name }}</strong><br>
+                                <span class="text-muted">{{ ngo.location }} · Capacity {{ ngo.capacity }}</span>
+                            </li>
+                        {% else %}
+                            <li class="list-group-item px-0 text-muted">No exact location match found.</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted">Submit food details to see AI freshness prediction and NGO matches.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

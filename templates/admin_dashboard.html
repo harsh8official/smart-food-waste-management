@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="container py-4">
+    <div class="dashboard-title">
+        <div>
+            <p class="eyebrow">Admin dashboard</p>
+            <h1>System Analytics</h1>
+        </div>
+    </div>
+    <div class="row g-3 mb-4">
+        <div class="col-sm-6 col-xl-4"><div class="stat-card"><span>Total Users</span><strong>{{ stats.total_users }}</strong></div></div>
+        <div class="col-sm-6 col-xl-4"><div class="stat-card"><span>Total NGOs</span><strong>{{ stats.total_ngos }}</strong></div></div>
+        <div class="col-sm-6 col-xl-4"><div class="stat-card"><span>Total Donations</span><strong>{{ stats.total_donations }}</strong></div></div>
+        <div class="col-sm-6 col-xl-4"><div class="stat-card"><span>Pending Requests</span><strong>{{ stats.pending_requests }}</strong></div></div>
+        <div class="col-sm-6 col-xl-4"><div class="stat-card"><span>Accepted Donations</span><strong>{{ stats.accepted_donations }}</strong></div></div>
+        <div class="col-sm-6 col-xl-4"><div class="stat-card"><span>Waste Reduction Units</span><strong>{{ stats.waste_reduction }}</strong></div></div>
+    </div>
+    <div class="row g-4">
+        <div class="col-lg-5">
+            <div class="panel">
+                <h2 class="h4">Donations by Category</h2>
+                <canvas id="categoryChart" data-labels='{{ category_stats|map(attribute="category")|list|tojson }}' data-values='{{ category_stats|map(attribute="total")|list|tojson }}'></canvas>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="panel">
+                <h2 class="h4">Latest Donations</h2>
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead><tr><th>Food</th><th>Category</th><th>Status</th><th>Freshness</th></tr></thead>
+                        <tbody>
+                            {% for donation in latest_donations %}
+                                <tr>
+                                    <td>{{ donation.food_name }}</td>
+                                    <td>{{ donation.category }}</td>
+                                    <td><span class="status-pill">{{ donation.status }}</span></td>
+                                    <td>{{ donation.freshness_prediction }}</td>
+                                </tr>
+                            {% else %}
+                                <tr><td colspan="4" class="text-center text-muted py-4">No donations yet.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

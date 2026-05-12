@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: smart-food-waste-management
+    env: python
+    buildCommand: pip install -r requirements.txt && python ml/train_model.py
+    startCommand: gunicorn app:app
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: MYSQL_HOST
+        sync: false
+      - key: MYSQL_USER
+        sync: false
+      - key: MYSQL_PASSWORD
+        sync: false
+      - key: MYSQL_DB
+        value: smart_food_waste

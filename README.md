@@ -118,20 +118,46 @@ Add screenshots here after running the app:
 
 ## Deployment
 
+For Render and Railway, use a production server instead of the Flask development server:
+
+```bash
+gunicorn app:app
+```
+
+Required environment variables:
+
+```text
+SECRET_KEY=use_a_long_random_secret
+MYSQL_HOST=your_mysql_host
+MYSQL_USER=your_mysql_user
+MYSQL_PASSWORD=your_mysql_password
+MYSQL_DB=smart_food_waste
+MYSQL_PORT=3306
+MAIL_USERNAME=optional_email_username
+MAIL_PASSWORD=optional_email_app_password
+MAIL_DEFAULT_SENDER=optional_sender_email
+```
+
+On Railway, the app also accepts Railway's common MySQL variable names: `MYSQLHOST`, `MYSQLUSER`, `MYSQLPASSWORD`, `MYSQLDATABASE`, and `MYSQLPORT`.
+
+Import `database/schema.sql` into the deployed MySQL database before opening the live app URL. The home page reads from MySQL, so wrong database credentials or missing tables will cause a server error.
+
 ### Render
 
 1. Push the project to GitHub.
 2. Create a new Render Web Service.
-3. Use `pip install -r requirements.txt` as the build command.
+3. Use `pip install -r requirements.txt && python ml/train_model.py` as the build command.
 4. Use `gunicorn app:app` as the start command.
 5. Add MySQL and mail settings as environment variables.
+6. Import `database/schema.sql` into your cloud MySQL database.
 
 ### Railway
 
 1. Create a Railway project from your GitHub repository.
 2. Add a MySQL service.
 3. Set the database environment variables.
-4. Use `python app.py` for testing or `gunicorn app:app` for production.
+4. Use `gunicorn app:app` as the start command.
+5. Import `database/schema.sql` into the Railway MySQL database.
 
 ### PythonAnywhere
 

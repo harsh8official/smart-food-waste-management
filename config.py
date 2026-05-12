@@ -8,10 +8,10 @@ class Config:
 
     SECRET_KEY = os.environ.get("SECRET_KEY", "change-this-secret-key")
 
-    MYSQL_HOST = os.environ.get("MYSQL_HOST", "localhost")
+    MYSQL_HOST = os.environ.get("MYSQL_HOST", "mysql.railway.internal")
     MYSQL_USER = os.environ.get("MYSQL_USER", "root")
-    MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", "")
-    MYSQL_DB = os.environ.get("MYSQL_DB", "smart_food_waste")
+    MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", "mOcWBEIrnxNaOVkNLnNkSAGFjyGZrLqZ")
+    MYSQL_DB = os.environ.get("MYSQL_DB", "railway")
     MYSQL_CURSORCLASS = "DictCursor"
 
     UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), "uploads")

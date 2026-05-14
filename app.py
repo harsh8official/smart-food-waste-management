@@ -26,6 +26,7 @@ from config import Config
 
 app = Flask(__name__)
 app.config.from_object(Config)
+os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
 
 mysql = MySQL(app)
 mail = Mail(app)

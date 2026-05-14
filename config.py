@@ -7,14 +7,13 @@ class Config:
     """Centralized Flask, MySQL, upload, and mail settings."""
 
     SECRET_KEY = os.environ.get("SECRET_KEY", "change-this-secret-key")
-
-    MYSQL_HOST = os.environ.get("MYSQL_HOST", "yamabiko.proxy.rlwy.net")
-    MYSQL_PORT = int(os.environ.get("MYSQL_PORT", 33863))
-    MYSQL_USER = os.environ.get("MYSQL_USER", "root")
-    MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", "mOcWBEIrnxNaOVkNLnNkSAGFjyGZrLqZ")
-    MYSQL_DB = os.environ.get("MYSQL_DB", "railway")
+    MYSQL_HOST = os.environ.get("MYSQL_HOST")
+    MYSQL_PORT = int(os.environ.get("MYSQL_PORT", 3306))
+    MYSQL_USER = os.environ.get("MYSQL_USER")
+    MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD")
+    MYSQL_DB = os.environ.get("MYSQL_DB")
     MYSQL_CURSORCLASS = "DictCursor"
-
+    
     UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), "uploads")
     MAX_CONTENT_LENGTH = 5 * 1024 * 1024
     ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif", "webp"}

@@ -8,11 +8,11 @@ class Config:
 
     SECRET_KEY = os.environ.get("SECRET_KEY", "change-this-secret-key")
 
-    MYSQL_HOST = os.environ.get("MYSQL_HOST") or os.environ.get("MYSQLHOST", "localhost")
-    MYSQL_USER = os.environ.get("MYSQL_USER") or os.environ.get("MYSQLUSER", "root")
-    MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD") or os.environ.get("MYSQLPASSWORD", "")
-    MYSQL_DB = os.environ.get("MYSQL_DB") or os.environ.get("MYSQLDATABASE", "smart_food_waste")
-    MYSQL_PORT = int(os.environ.get("MYSQL_PORT") or os.environ.get("MYSQLPORT", 3306))
+    MYSQL_HOST = os.environ.get("MYSQL_HOST", "yamabiko.proxy.rlwy.net")
+    MYSQL_PORT = int(os.environ.get("MYSQL_PORT", 33863))
+    MYSQL_USER = os.environ.get("MYSQL_USER", "root")
+    MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", "mOcWBEIrnxNaOVkNLnNkSAGFjyGZrLqZ")
+    MYSQL_DB = os.environ.get("MYSQL_DB", "railway")
     MYSQL_CURSORCLASS = "DictCursor"
 
     UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), "uploads")
